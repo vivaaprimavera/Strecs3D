@@ -37,14 +37,20 @@ else()
 endif()
 
 # vcpkgからlib3mfを検索
-find_package(lib3mf REQUIRED)
-if(lib3mf_FOUND)
-  message(STATUS "lib3mf found: ${lib3mf_VERSION}")
-else()
-  message(FATAL_ERROR "lib3mf not found. Please install via vcpkg: vcpkg install lib3mf")
+if(NOT CMAKE_SYSTEM_NAME STREQUAL "Linux")
+       find_package(lib3mf REQUIRED)
+       if(lib3mf_FOUND)
+               message(STATUS "lib3mf found: ${lib3mf_VERSION}")
+       else()
+               message(FATAL_ERROR "lib3mf not found. Please install via vcpkg: vcpkg install lib3mf")
+       endif()
 endif()
 
 # vcpkgからVTKを検索（Qtサポート付き）
+if(NOT CMAKE_SYSTEM_NAME STREQUAL "Linux")
+list(APPEND CMAKE_PREFIX_PATH "/usr/local/lib")
+endif()
+ 
 find_package(VTK REQUIRED
   COMPONENTS
     CommonCore
@@ -120,6 +126,8 @@ if(WIN32)
   apply_windows_settings(Strecs3D)
 elseif(APPLE)
   apply_macos_settings(Strecs3D)
+else()
+  apply_other_settings(Strecs3D)
 endif()
 
 # VTK 自動初期化設定 (VTK バージョンが 8.90.0 以上の場合)
@@ -128,4 +136,4 @@ if(VTK_VERSION VERSION_GREATER_EQUAL "8.90.0")
     TARGETS Strecs3D
     MODULES ${VTK_LIBRARIES}
   )
-endif() 
+endif()
