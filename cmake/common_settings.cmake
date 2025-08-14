@@ -37,14 +37,13 @@ else()
 endif()
 
 # vcpkgからlib3mfを検索
-if(NOT CMAKE_SYSTEM_NAME STREQUAL "Linux")
-       find_package(lib3mf REQUIRED)
+find_package(lib3mf REQUIRED)
        if(lib3mf_FOUND)
                message(STATUS "lib3mf found: ${lib3mf_VERSION}")
        else()
                message(FATAL_ERROR "lib3mf not found. Please install via vcpkg: vcpkg install lib3mf")
        endif()
-endif()
+
 
 # vcpkgからVTKを検索（Qtサポート付き）
 if(NOT CMAKE_SYSTEM_NAME STREQUAL "Linux")
