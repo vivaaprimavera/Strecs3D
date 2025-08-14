@@ -24,8 +24,9 @@ if(WIN32)
 elseif(APPLE)
   include(cmake/macos_settings.cmake)
 else()
-  message(FATAL_ERROR "Unsupported operating system. Only Windows and macOS are supported.")
+  include(cmake/other_settings.cmake)
 endif()
 
 # 共通設定をインクルード
 include(cmake/common_settings.cmake)
+
