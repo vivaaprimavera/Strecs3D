@@ -6,7 +6,6 @@ function(apply_other_settings TARGET_NAME)
     Qt6::Core
     Qt6::Widgets
     ${VTK_LIBRARIES}
-    lib3mf::lib3mf
     libzip::zip
   )
 
