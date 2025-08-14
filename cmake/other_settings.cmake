@@ -6,6 +6,7 @@ function(apply_other_settings TARGET_NAME)
     Qt6::Core
     Qt6::Widgets
     ${VTK_LIBRARIES}
+    lib3mf::lib3mf
     libzip::zip
   )
 
@@ -29,7 +30,7 @@ if(Qt6_DIR)
 endif()
 
 find_package(PkgConfig)
-pkg_check_modules(LIB3MF IMPORTED_TARGET lib3MF)
+pkg_check_modules(LIB3MF IMPORTED_TARGET lib3mf)
 if(LIB3MF_FOUND)
     message(STATUS "lib3MF found: ${LIB3MF_VERSION}")
 else()
