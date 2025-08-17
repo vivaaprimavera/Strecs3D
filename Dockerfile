@@ -43,8 +43,9 @@ ENV LC_ALL=en_GB.UTF-8
 
 RUN apt install -y  locales
 
-RUN update-locale LANG=en_GB.UTF-8
 
+#RUN update-locale LANG=en_GB.UTF-8
+RUN update-locale
 
 RUN mkdir -p /root/.config
 RUN mkdir -p /root/Downloads
@@ -98,3 +99,19 @@ WORKDIR Strecs3D
 RUN mkdir build
 
 WORKDIR build
+
+RUN cmake .. && make
+
+RUN apt -y install python3-pip \
+	python3-pip-whl \
+	binutils \
+	coreutils \
+	desktop-file-utils \
+	fakeroot \
+	fuse \
+	patchelf \
+	python3-setuptools \
+	squashfs-tools \
+	strace \
+	util-linux \
+	zsync
